@@ -28,10 +28,6 @@ public class CISUserActivity extends AppCompatActivity {
 
         this.recView = findViewById(R.id.recView);
 
-        //👮‍👮‍👮‍👮‍👮‍👮‍👮‍👮‍👮‍LOOK HERE!!!!!!! 👮‍👮‍👮‍👮‍👮‍👮‍👮‍👮‍👮‍👮‍👮‍👮‍👮‍👮
-        //1. We are not yet logged in, where can we update the userid?
-        //3. This page crashes
-
         //we give CIS adapter the data, and the data will pass through constructor, then the constructor will goto
         //CISAdapter's arraylist
         //Then the Arraylist will be used by the view holder binder for whatever index
@@ -49,13 +45,13 @@ public class CISUserActivity extends AppCompatActivity {
 
             //send request, save them into all stuff
             String menuResultFromServer = SimpleClient.makeRequest(CISConstants.HOST, askMenuRequest);
-            System.out.println("MENU: "+ menuResultFromServer);
+            System.out.println("MENU: " + menuResultFromServer);
+//            This is for testing
 //            String menuResultFromServer = "Hamburger|tasty|10.0|10|lunch|abcd0;french fries|tasty|9.0|10|breakfast|efgh1;Hamburger|tasty|10.0|10|lunch|abcd0;french fries|tasty|9.0|10|breakfast|efgh1;Hamburger|tasty|10.0|10|lunch|abcd0;french fries|tasty|9.0|10|breakfast|efgh1;Hamburger|tasty|10.0|10|lunch|abcd0;french fries|tasty|9.0|10|breakfast|efgh1;Hamburger|tasty|10.0|10|lunch|abcd0;french fries|tasty|9.0|10|breakfast|efgh1;Hamburger|tasty|10.0|10|lunch|abcd0;french fries|tasty|9.0|10|breakfast|efgh1";
             String[] parts = menuResultFromServer.split(";");
 
             this.allStuff = parts;
-        }
-        catch (Exception err) {
+        } catch (Exception err) {
             Toast errorServerAsk = Toast.makeText(this, "ARGHGHGHGH......" + err.toString(), Toast.LENGTH_LONG);
             errorServerAsk.show();
         }
@@ -65,11 +61,6 @@ public class CISUserActivity extends AppCompatActivity {
         try {
             //make a request
             Request placeOrderRequest = new Request(CISConstants.PLACE_ORDER);
-
-            //TBD, do we have to send parameters?
-//    placeOrderRequest.addParam(CISConstants.ORDER_ID_PARAM, userIdTextbox.getText().toString());
-//    placeOrderRequest.addParam(CISConstants.ORDER_TYPE_PARAM, userNameTextbox.getText().toString());
-//    placeOrderRequest.addParam(CISConstants.ITEM_ID_PARAM,);
 
             //send request to URL
             String placeOrderResult = SimpleClient.makeRequest(CISConstants.HOST, placeOrderRequest);
@@ -84,7 +75,8 @@ public class CISUserActivity extends AppCompatActivity {
             errorOrderMessageToUser.show();
         }
     }
-    public void getOrders(View view){
+
+    public void getOrders(View view) {
         try {
             //create request by command getOrders
             Request orderRequest = new Request(CISConstants.GET_ORDER);
@@ -105,19 +97,18 @@ public class CISUserActivity extends AppCompatActivity {
         }
     }
 
-    public void deleteOrders(View view){
-        try{
+    public void deleteOrders(View view) {
+        try {
             Request deleteOrderRequest = new Request(CISConstants.DELETE_ORDER);
 
-            EditText deleteOrderIDTextbox = (EditText)findViewById(R.id.deleteorder);
+            EditText deleteOrderIDTextbox = (EditText) findViewById(R.id.deleteorder);
             deleteOrderRequest.addParam(CISConstants.ORDER_ID_PARAM, deleteOrderIDTextbox.getText().toString());
 
             String deleteResult = SimpleClient.makeRequest(CISConstants.HOST, deleteOrderRequest);
 
-            Toast deleteMessage = Toast.makeText(this, "Deleted succesfully!" + deleteResult, Toast.LENGTH_LONG);
+            Toast deleteMessage = Toast.makeText(this, "Deleted successfully!" + deleteResult, Toast.LENGTH_LONG);
             deleteMessage.show();
-        }
-        catch(Exception err){
+        } catch (Exception err) {
             Toast errMessage = Toast.makeText(this, "and I whoop..." + err.toString(), Toast.LENGTH_LONG);
             errMessage.show();
         }

@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void getUser(View view){
+    public void getUser(View view) {
         try {
             //make a request
             Request getUserRequest = new Request(CISConstants.GET_USER);

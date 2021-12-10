@@ -1,4 +1,5 @@
 package edu.cis.ibcs_app.Controllers;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,8 @@ public class CISAdapter extends RecyclerView.Adapter<CISViewHolder> {
         this.menuItemAmountAvailable = menuItemAmountAvailable;
         this.menuItemType = menuItemType;
     }
-    public CISAdapter(String[] strings){
+
+    public CISAdapter(String[] strings) {
         this.menuItemNames = new ArrayList<>();
         this.menuItemNames = new ArrayList<>();
         this.menuItemDescription = new ArrayList<>();
@@ -42,7 +44,7 @@ public class CISAdapter extends RecyclerView.Adapter<CISViewHolder> {
         this.menuItemAmountAvailable = new ArrayList<>();
         this.menuItemType = new ArrayList<>();
 
-        for (String menuItem : strings){
+        for (String menuItem : strings) {
             //TBD, THE MENUiTEM HERE IS NULL
             String[] itemStrings = menuItem.split("\\|");
 
